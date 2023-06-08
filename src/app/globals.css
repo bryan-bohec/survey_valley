@@ -25,3 +25,51 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+
+
+.rounded {
+  border-radius: 15px;
+}
+
+.email-container, .password-container {
+  position: relative;
+  width: 100%;
+  display: block;
+}
+
+.email-container::before {
+  content: '';
+  background-image: url(../app/assets/email.png);
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.password-container::before {
+  content: '';
+  background-image: url(../app/assets/passwordIcon.png);
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.email, .password {
+  padding-left: 35px;
+  width: 100%;
+}
+
+.main-background {
+  background-image: url(../app/assets//background.png);
+  background-position: 50%;
+  background-color: #6232a8;
+}
