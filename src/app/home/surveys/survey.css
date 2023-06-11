@@ -1,0 +1,29 @@
+.desc {
+  position: absolute;
+  bottom: 0;
+  padding: 1em;
+  background-color: darkcyan;
+  opacity: 0.9;
+  height: 100px;
+  overflow: hidden;
+}
+
+.surveyCard {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: all 0.2s;
+}
+
+.surveyCard:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 50px;
+}
+
+.title {
+  display: inline;
+  position: relative;
+  top: 0.2em;
+  right: 1em;
+}
+
+.gris {
+    filter: grayscale(90%);
+}

@@ -5,7 +5,7 @@ import "../globals.css";
 import "@fontsource/roboto";
 import Link from "next/link";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import firebaseApp from "../config/firebase.js";
+
 const auth = getAuth(firebaseApp);
 
 export default function Home() {

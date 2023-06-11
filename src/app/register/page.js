@@ -22,6 +22,7 @@ export default function Register() {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
       console.log(userCredential.user);
+      alert("vous avez été enregistré")
     } catch (error) {
       alert(error);
     }

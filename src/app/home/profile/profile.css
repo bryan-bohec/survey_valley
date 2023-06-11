@@ -1,0 +1,7 @@
+.profileForm {
+  width: max(20%, 300px);
+}
+
+input::placeholder {
+    color : gray
+}
