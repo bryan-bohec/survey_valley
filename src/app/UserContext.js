@@ -1,39 +1,46 @@
 "use client";
 import React, { createContext, useState, useEffect } from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "./config/firebase";
-import { collection, getDoc, setDoc, doc, onSnapshot } from "firebase/firestore";
-import { db } from "../app/config/firebase";
+import supabase from "./config/supabase";
 export const UserContext = createContext();
+import { useRouter } from "next/navigation";
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [userData, setUserData] = useState(null);
+const router = useRouter();
+
+
+
+  const getUser = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    setUser(user)
+  }
 
   useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setUser(user);
-        console.log(user);
-        const userDataRef = doc(db, "profile", user.uid);
-        const userDataSnapshot = await getDoc(userDataRef);
-
-        if (userDataSnapshot.exists()) {
-          setUserData(userDataSnapshot.data());
-        } else {
-          setUserData(null);
-        }
-      } else {
-        setUser(null);
-      }
-    });
-
-
+    getUser()
   }, []);
 
   const logout = async () => {
-    await signOut(auth)
+    let { error } = await supabase.auth.signOut();
+    if (!error) {
+      router.push("/login")
+    } else {
+      alert("Erreur deconnexion")
+    }
+  };
+
+  const updateUser = async (userData) =>{
+    const { data, error } = await supabase.auth.updateUser({
+      data: { userData }
+    })
+    getUser();
+    if (error) {
+      return false; // Return false if there is an error
+    } else {
+      return true; // Return true if the update was successful
+    }
   }
 
-  return <UserContext.Provider value={{ user, setUser, userData, setUserData, logout }}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ user, updateUser, logout, getUser }}>{children}</UserContext.Provider>;
 };

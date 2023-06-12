@@ -3,12 +3,9 @@ import "./profile.css";
 import { useForm } from "react-hook-form";
 import { useEffect, useContext, useState } from "react";
 import { UserContext } from "../../UserContext";
-import { db } from "../../config/firebase";
-import { collection, getDoc, setDoc, doc } from "firebase/firestore";
 
 export default function Profile() {
-  const { user } = useContext(UserContext);
-  const { userData, setUserData } = useContext(UserContext);
+  const { user, updateUser, getUser } = useContext(UserContext);
   const [showSaveMessage, setShowSaveMessage] = useState(false);
 
   const {
@@ -29,28 +26,38 @@ export default function Profile() {
   };
 
 
-  const onSubmit = (data) => {
-    const ref = doc(db, "profile", user.uid);
-    setDoc(ref, data);
-    setShowSaveMessage(true);
-    setUserData(data);
-    setTimeout(()=> setShowSaveMessage(false), 3000)
+  const onSubmit = async (data) => {
+    const valid = await updateUser({profile : data})
+    console.log(valid)
+    if (valid) {
+      setShowSaveMessage(true)
+      setTimeout(()=> setShowSaveMessage(false), 3000)
+    } else {
+      alert("Une erreur est survenue.")
+    }
+    
   };
 
   useEffect(() => {
-    if (userData) {
-      setValue("nom", userData.nom);
-      setValue("prenom", userData.prenom);
-      setValue("dateNaissance", userData.dateNaissance);
-      setValue("numeroTel", userData.numeroTel);
-      setValue("ville", userData.ville);
-      setValue("codePostal", userData.codePostal);
-      setValue("adresse", userData.adresse);
+    if (user?.user_metadata?.userData?.profile) {
+      const {nom, prenom, dateNaissance, numeroTel, ville, codePostal, adresse} = user.user_metadata.userData.profile
+      setValue("nom", nom);
+      setValue("prenom", prenom);
+      setValue("dateNaissance", dateNaissance);
+      setValue("numeroTel", numeroTel);
+      setValue("ville", ville);
+      setValue("codePostal", codePostal);
+      setValue("adresse", adresse);
     } else {
       console.log("User document does not exist");
     }
+    if (user) {
+      console.log(user)
+    } else {
+      console.log("aa")
+    }
 
-  }, [userData]);
+  }, [user]);
 
   return (
     <div>

@@ -1,16 +1,18 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Image from "next/image";
 import "../globals.css";
 import "@fontsource/roboto";
 import Link from "next/link";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import {auth} from "../config/firebase"
-
+import supabase from "../config/supabase";
+import { useRouter } from "next/navigation";
+import { UserContext } from "../UserContext";
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+  const {getUser} = useContext(UserContext)
 
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -20,10 +22,14 @@ export default function Home() {
   };
 
   const signIn = async () => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log(userCredential.user);
-    } catch (error) {
+    let { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+    if (!error) {
+      getUser();
+      router.push("/home/surveys");
+    } else {
       alert(error);
     }
   };

@@ -8,18 +8,20 @@ import { getAuth } from "firebase/auth";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBgeN_kDV1owSzezoD19dic7gC9XSjlDRs",
-  authDomain: "survey-valley2.firebaseapp.com",
-  projectId: "survey-valley2",
-  storageBucket: "survey-valley2.appspot.com",
-  messagingSenderId: "783092318469",
-  appId: "1:783092318469:web:c7e02ddd4a3e112b77376c",
-  measurementId: "G-JV9LTJ12G7"
-};
 
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-export const auth = getAuth(app)
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBgeN_kDV1owSzezoD19dic7gC9XSjlDRs",
+//   authDomain: "survey-valley2.firebaseapp.com",
+//   projectId: "survey-valley2",
+//   storageBucket: "survey-valley2.appspot.com",
+//   messagingSenderId: "783092318469",
+//   appId: "1:783092318469:web:c7e02ddd4a3e112b77376c",
+//   measurementId: "G-JV9LTJ12G7"
+// };
+
+// // Initialize Firebase
+// export const app = initializeApp(firebaseConfig);
+// export const db = getFirestore(app);
+// export const auth = getAuth(app)

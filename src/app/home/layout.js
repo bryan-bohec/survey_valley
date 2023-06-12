@@ -21,19 +21,3 @@ export default function MainLayout({ children }) {
   );
 }
 
-const mainRoutes = [
-  {
-    name: "Les sondages",
-    route: "/home/surveys",
-  },
-  {
-    name: "Les résultats",
-    route: "/home/results",
-  },
-];
-const sideRoutes = [
-  {
-    name: "Votre profil",
-    route: "/home/profile",
-  },
-];

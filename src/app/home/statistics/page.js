@@ -1,18 +1,19 @@
 "use client";
-import { db } from "../../config/firebase";
-import { collection, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import ResultTable from "./ResultTable";
+import supabase from "../../config/supabase";
 
 export default function Statistics() {
   const [surveys, setSurveys] = useState([]);
 
   const fetchSurveys = async () => {
-    await getDocs(collection(db, "Sondages")).then((querySnapshot) => {
-      const newData = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      setSurveys(newData.sort((a, b) => a.idSondage - b.idSondage));
-      console.log(surveys, newData);
-    });
+    let { data: surveys_data, error } = await supabase.from("surveys_data").select("*");
+
+    if (surveys_data) {
+      setSurveys(surveys_data);
+    } else {
+      alert("Erreur de chargement des sondages");
+    }
   };
 
   useEffect(() => {
