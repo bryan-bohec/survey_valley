@@ -67,7 +67,7 @@ export const SidebarNav = () => {
   const [hasImage, setHasImage] = React.useState(true);
   const [theme, setTheme] = React.useState("dark");
 
-  const { user, userData } = useContext(UserContext);
+  const { user, userData, logout } = useContext(UserContext);
 
   const pathname = usePathname();
 
@@ -135,7 +135,10 @@ export const SidebarNav = () => {
                 </MenuItem>
               </Link>
 
-              <MenuItem icon={<BarChart />}>Résultats</MenuItem>
+              <Link href="/home/statistics">
+              <MenuItem icon={<BarChart />} className={`${pathname === "/home/statistics" ? "bg-light-blue text-white" : ""}`}>Résultats</MenuItem>
+              </Link>
+              
             </Menu>
 
             <div style={{ padding: "0 24px", marginBottom: "8px", marginTop: "32px" }}>
@@ -160,7 +163,7 @@ export const SidebarNav = () => {
                   Votre profil
                 </MenuItem>
               </Link>
-              <MenuItem icon={<Logout />}>Se déconnecter</MenuItem>
+              <MenuItem icon={<Logout />} onClick={logout}>Se déconnecter</MenuItem>
             </Menu>
           </div>
         </div>

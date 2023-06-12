@@ -5,8 +5,8 @@ import "../globals.css";
 import "@fontsource/roboto";
 import Link from "next/link";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {auth} from "../config/firebase"
 
-const auth = getAuth(firebaseApp);
 
 export default function Home() {
   const [email, setEmail] = useState("");
