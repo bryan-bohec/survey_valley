@@ -18,28 +18,22 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
-
-
 
 .rounded {
   border-radius: 15px;
 }
 
-.email-container, .password-container {
+.email-container,
+.password-container {
   position: relative;
   width: 100%;
   display: block;
 }
 
 .email-container::before {
-  content: '';
+  content: "";
   background-image: url(../app/assets/email.png);
   position: absolute;
   left: 10px;
@@ -51,7 +45,7 @@ body {
   background-repeat: no-repeat;
 }
 .password-container::before {
-  content: '';
+  content: "";
   background-image: url(../app/assets/passwordIcon.png);
   position: absolute;
   left: 10px;
@@ -63,7 +57,8 @@ body {
   background-repeat: no-repeat;
 }
 
-.email, .password {
+.email,
+.password {
   padding-left: 35px;
   width: 100%;
 }
@@ -76,4 +71,15 @@ body {
 
 .sidebar {
   box-shadow: 20px 0 20px 0 rgba(0, 0, 0, 0.12), 0 2px 3px 0 rgba(0, 0, 0, 0.22);
+}
+
+@media only screen and (max-width: 800px) {
+  .loginContainer {
+    flex-direction: column-reverse;
+  }
+
+  .loginContainer > div {
+    width: 100%;
+    padding: 0px;
+  }
 }

@@ -28,7 +28,6 @@ export default function Profile() {
 
   const onSubmit = async (data) => {
     const valid = await updateUser({profile : data})
-    console.log(valid)
     if (valid) {
       setShowSaveMessage(true)
       setTimeout(()=> setShowSaveMessage(false), 3000)

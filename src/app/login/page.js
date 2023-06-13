@@ -36,7 +36,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex justify-center items-center text-white font-roboto tracking-widest main-background">
-      <div className="container flex bg-dark-blue px-14 py-9">
+      <div className="container flex bg-dark-blue px-14 py-9 loginContainer">
         <div className="flex flex-col bg-light-blue w-1/2 rounded-2xl items-center text-4xl tracking-normal font-bold p-9">
           <Image src="/surveyValley.png" alt="Description of the image" width={400} height={400} className="-mt-20 -mb-" />
           <div className="text-center">

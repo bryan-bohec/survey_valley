@@ -8,6 +8,7 @@ export default function Surveys() {
   const [surveys, setSurveys] = useState([]);
   const { getUser, user } = useContext(UserContext);
 
+
   const fetchSurveys = async () => {
     let { data: surveys_data, error } = await supabase.from("surveys_data").select("*");
 

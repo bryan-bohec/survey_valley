@@ -1,0 +1,42 @@
+.flexAliment {
+  display: flex;
+  align-items: center;
+
+  min-height: 3em;
+  padding: 0.2em;
+}
+
+.nom {
+  max-width: 70%;
+  margin-right: auto;
+  position: relative;
+}
+
+.lienResultats {
+  text-decoration: underline;
+  display: inline-block;
+}
+.lienResultats:hover {
+  cursor: pointer;
+}
+
+img {
+  width: 40px;
+  margin-right: 0.5em;
+  height: auto;
+}
+
+.energy {
+  font-size: 0.7em;
+  color: gray;
+  margin-top: -5px;
+}
+
+.alimCard {
+  min-height: 200px;
+  position: relative;
+}
+
+.sendBtn {
+  margin-top : 2em;
+}
