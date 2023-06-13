@@ -1,10 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import SurveyCard from "./SurveyCard";
 import supabase from "../../config/supabase";
+import { UserContext } from "../../UserContext";
 
 export default function Surveys() {
   const [surveys, setSurveys] = useState([]);
+  const { getUser, user } = useContext(UserContext);
 
   const fetchSurveys = async () => {
     let { data: surveys_data, error } = await supabase.from("surveys_data").select("*");
@@ -17,6 +19,7 @@ export default function Surveys() {
   };
 
   useEffect(() => {
+    getUser();
     fetchSurveys();
   }, []);
 
@@ -26,7 +29,7 @@ export default function Surveys() {
       <hr className="mb-4"></hr>
       <div className="flex flex-wrap gap-6">
         {surveys.map((s) => (
-          <SurveyCard key={s.id} id={s.id} nom={s.nom} description={s.description} actif={s.actif} backgroundUrl={s.backgroundUrl} />
+          <SurveyCard key={s.id} id={s.id} user={user} nom={s.nom} description={s.description} actif={s.actif} backgroundUrl={s.backgroundUrl} />
         ))}
       </div>
     </div>

@@ -12,7 +12,7 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const {getUser} = useContext(UserContext)
+  const { getUser } = useContext(UserContext);
 
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -67,7 +67,7 @@ export default function Home() {
             </button>
 
             <Link href="/register" className="m-auto text-xs underline cursor-pointer">
-              <p>Vous n'avez pas de compte ? S'inscrire</p>
+              <p>Vous n avez pas de compte ? S inscrire</p>
             </Link>
           </div>
         </div>

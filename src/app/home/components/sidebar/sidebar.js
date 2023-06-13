@@ -103,7 +103,7 @@ export const SidebarNav = () => {
   };
 
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
+    <div style={{ display: "flex", height: "w-full" }}>
       <Sidebar
         collapsed={collapsed}
         toggled={toggled}

@@ -37,7 +37,7 @@ export default function Register() {
     <main className="min-h-screen flex justify-center items-center text-white font-roboto tracking-widest main-background">
       <div className="container flex bg-dark-blue px-14 py-9">
         <div className="flex flex-col bg-dark-blue w-full  p-9">
-          <h2 className="text-2xl">S'inscrire</h2>
+          <h2 className="text-2xl">Inscription</h2>
           <div className="flex flex-col w-4/5 border-black gap-9 p-9 w-full">
             <div className="email-container">
               <input type="text" placeholder="Adresse email" value={email} onChange={handleChangeEmail} className="h-10 border border-white border-3 bg-transparent placeholder-white email"></input>
