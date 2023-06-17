@@ -102,80 +102,96 @@ export const SidebarNav = () => {
     }),
   };
 
+  useEffect(() => {
+    setBroken(window.innerWidth < 768); // Update the broken state on the client-side
+
+    const handleResize = () => {
+      setBroken(window.innerWidth < 768); // Update the broken state on window resize
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div style={{ display: "flex", height: "w-full" }}>
-      <Sidebar
-        collapsed={collapsed}
-        toggled={toggled}
-        onBackdropClick={() => setToggled(false)}
-        onBreakPoint={setBroken}
-        image="https://user-images.githubusercontent.com/25878302/144499035-2911184c-76d3-4611-86e7-bc4e8ff84ff5.jpg"
-        rtl={rtl}
-        breakPoint="md"
-        backgroundColor={hexToRgba(themes[theme].sidebar.backgroundColor, hasImage ? 0.9 : 1)}
-        rootStyles={{
-          color: themes[theme].sidebar.color,
-        }}
-        style={{ border: "0" }}
-        className="sidebar"
-      >
-        <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-          <Image src="/surveyValley.png" alt="Description of the image" width={400} height={400} className="-mt-6" />
-          <div style={{ flex: 1, marginBottom: "32px" }}>
-            <div style={{ padding: "0 24px", marginBottom: "8px" }}>
-              {user && <h2 className="text-white mb-4">{user.email}</h2>}
-              <Typography variant="body2" fontWeight={600} style={{ opacity: collapsed ? 0 : 0.7, letterSpacing: "0.5px" }}>
-                Les sondages
-              </Typography>
+      {typeof window !== "undefined" && (
+        <Sidebar
+          collapsed={collapsed}
+          toggled={toggled}
+          onBackdropClick={() => setToggled(false)}
+          onBreakPoint={setBroken}
+          image="https://user-images.githubusercontent.com/25878302/144499035-2911184c-76d3-4611-86e7-bc4e8ff84ff5.jpg"
+          rtl={rtl}
+          breakPoint="md"
+          backgroundColor={hexToRgba(themes[theme].sidebar.backgroundColor, hasImage ? 0.9 : 1)}
+          rootStyles={{
+            color: themes[theme].sidebar.color,
+          }}
+          style={{ border: "0" }}
+          className="sidebar"
+        >
+          <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+            <Image src="/surveyValley.png" alt="Description of the image" width={400} height={400} className="-mt-6" />
+            <div style={{ flex: 1, marginBottom: "32px" }}>
+              <div style={{ padding: "0 24px", marginBottom: "8px" }}>
+                {user && <h2 className="text-white mb-4">{user.email}</h2>}
+                <Typography variant="body2" fontWeight={600} style={{ opacity: collapsed ? 0 : 0.7, letterSpacing: "0.5px" }}>
+                  Les sondages
+                </Typography>
+              </div>
+              <Menu menuItemStyles={menuItemStyles}>
+                <Link href="/home/surveys">
+                  <MenuItem icon={<BarChart />} className={`${pathname === "/home/surveys" ? "bg-light-blue text-white" : ""}`}>
+                    Sondages
+                  </MenuItem>
+                </Link>
+
+                <Link href="/home/statistics">
+                  <MenuItem icon={<BarChart />} className={`${pathname === "/home/statistics" ? "bg-light-blue text-white" : ""}`}>
+                    Résultats
+                  </MenuItem>
+                </Link>
+              </Menu>
+
+              <div style={{ padding: "0 24px", marginBottom: "8px", marginTop: "32px" }}>
+                <Typography variant="body2" fontWeight={600} style={{ opacity: collapsed ? 0 : 0.7, letterSpacing: "0.5px" }}>
+                  Paramètres
+                </Typography>
+              </div>
+
+              <Menu menuItemStyles={menuItemStyles}>
+                <Link href="/home/profile">
+                  <MenuItem
+                    className={`${pathname === "/home/profile" ? "bg-light-blue text-white" : ""}`}
+                    icon={<Calendar />}
+                    suffix={
+                      !user?.user_metadata?.userData?.profile && (
+                        <Badge variant="danger" shape="circle">
+                          !
+                        </Badge>
+                      )
+                    }
+                  >
+                    Votre profil
+                  </MenuItem>
+                </Link>
+                <MenuItem icon={<Logout />} onClick={logout}>
+                  Se déconnecter
+                </MenuItem>
+              </Menu>
             </div>
-            <Menu menuItemStyles={menuItemStyles}>
-              <Link href="/home/surveys">
-                <MenuItem icon={<BarChart />} className={`${pathname === "/home/surveys" ? "bg-light-blue text-white" : ""}`}>
-                  Sondages
-                </MenuItem>
-              </Link>
-
-              <Link href="/home/statistics">
-                <MenuItem icon={<BarChart />} className={`${pathname === "/home/statistics" ? "bg-light-blue text-white" : ""}`}>
-                  Résultats
-                </MenuItem>
-              </Link>
-            </Menu>
-
-            <div style={{ padding: "0 24px", marginBottom: "8px", marginTop: "32px" }}>
-              <Typography variant="body2" fontWeight={600} style={{ opacity: collapsed ? 0 : 0.7, letterSpacing: "0.5px" }}>
-                Paramètres
-              </Typography>
-            </div>
-
-            <Menu menuItemStyles={menuItemStyles}>
-              <Link href="/home/profile">
-                <MenuItem
-                  className={`${pathname === "/home/profile" ? "bg-light-blue text-white" : ""}`}
-                  icon={<Calendar />}
-                  suffix={
-                    !user?.user_metadata?.userData?.profile && (
-                      <Badge variant="danger" shape="circle">
-                        !
-                      </Badge>
-                    )
-                  }
-                >
-                  Votre profil
-                </MenuItem>
-              </Link>
-              <MenuItem icon={<Logout />} onClick={logout}>
-                Se déconnecter
-              </MenuItem>
-            </Menu>
           </div>
-        </div>
-      </Sidebar>
+        </Sidebar>
+      )}
 
       <div style={{ marginBottom: "16px" }}>
         {broken && (
           <button className="sb-button absolute" onClick={() => setToggled(!toggled)}>
-            Toggle
+            <div className="py-1 px-4 bg-light-red text-black font-bold">Menu</div>
           </button>
         )}
       </div>
