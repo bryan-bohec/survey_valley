@@ -9,17 +9,27 @@ export default function Piechart(props) {
   const option = {
     tooltip: {
       trigger: "item",
+      confine: true,
     },
     legend: {
-      top: "5%",
-      left: "center",
+      left: "10",
+      orient: "vertical",
+      selected: {
+        "aliments infantiles": false,
+        "series 1": false,
+        "matières grasses": false,
+      },
+      textStyle: {
+        color: "white", // Changer la couleur ici
+      },
     },
+
     series: [
       {
         name: "Les groupes les plus choisis",
         type: "pie",
         radius: ["40%", "70%"],
-        avoidLabelOverlap: false,
+        avoidLabelOverlap: true,
         itemStyle: {
           borderRadius: 10,
           borderColor: "#fff",
@@ -31,7 +41,7 @@ export default function Piechart(props) {
         },
         emphasis: {
           label: {
-            show: true,
+            show: false,
             fontSize: 40,
             fontWeight: "bold",
           },
@@ -40,19 +50,13 @@ export default function Piechart(props) {
           show: false,
         },
         data: props.data.map((item) => ({ name: item.alim_grp_nom_fr, value: item.count, selected: false })),
-        legend: {
-          selected: {
-            "aliments infantiles": false,
-            "series 1": false,
-          },
-        },
       },
     ],
   };
 
   return (
     <div>
-      <h2>Les groupes les plus selectionnés</h2>
+      <h2 className="mb-6">Les groupes les plus selectionnés</h2>
       <ReactEcharts option={option} />
     </div>
   );
