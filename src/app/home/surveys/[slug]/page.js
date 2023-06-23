@@ -108,7 +108,7 @@ export default function QuestionnaireAliments({ params }) {
       let rep = [];
       rep.push(surveyId);
       const updatedProfile = {
-        ...user.user_metadata.userData.profile, // spread existing profile attributes
+        ...user.user_metadata.userData.profile,
         reponses: rep,
       };
       updateUser({ profile: updatedProfile });
@@ -116,7 +116,7 @@ export default function QuestionnaireAliments({ params }) {
       let newReponses = user?.user_metadata?.userData?.profile?.reponses;
       newReponses.push(surveyId);
       const updatedProfile = {
-        ...user.user_metadata.userData.profile, // spread existing profile attributes
+        ...user.user_metadata.userData.profile,
         reponses: newReponses,
       };
       updateUser({ profile: updatedProfile });
@@ -128,7 +128,7 @@ export default function QuestionnaireAliments({ params }) {
       donnees.push({ food_id: aliment.alim_code, user_id: uid });
     });
     console.log(donnees);
-    await supabase.from("survey_results").insert(donnees).select("*");
+    await supabase.from("survey_results_live").insert(donnees).select("*");
 
     console.log(user);
   };

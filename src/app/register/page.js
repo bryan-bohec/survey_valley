@@ -4,14 +4,15 @@ import Link from "next/link";
 import supabase from "../config/supabase";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import {  useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "../UserContext";
+import "../globals.css";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const {getUser} = useContext(UserContext)
+  const { getUser } = useContext(UserContext);
 
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -37,8 +38,8 @@ export default function Register() {
     <main className="min-h-screen flex justify-center items-center text-white font-roboto tracking-widest main-background">
       <div className="container flex bg-dark-blue px-14 py-9">
         <div className="flex flex-col bg-dark-blue w-full  p-9">
-          <h2 className="text-2xl">Inscription</h2>
-          <div className="flex flex-col w-4/5 border-black gap-9 p-9 w-full">
+          <h2 className="text-2xl registerTitle">Inscription</h2>
+          <div className="flex flex-col w-4/5 border-black gap-9 p-9 w-full registerContainer">
             <div className="email-container">
               <input type="text" placeholder="Adresse email" value={email} onChange={handleChangeEmail} className="h-10 border border-white border-3 bg-transparent placeholder-white email"></input>
             </div>

@@ -117,7 +117,7 @@ export const SidebarNav = () => {
   }, []);
 
   return (
-    <div style={{ display: "flex", height: "w-full" }}>
+    <div style={{ display: "flex", height: "w-full" }} suppressHydrationWarning={true}>
       {typeof window !== "undefined" && (
         <Sidebar
           collapsed={collapsed}

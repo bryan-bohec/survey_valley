@@ -81,5 +81,18 @@ body {
   .loginContainer > div {
     width: 100%;
     padding: 0px;
+    padding-block: 10px;
   }
+
+  .registerContainer {
+    padding: 0;
+  }
+
+  .registerTitle {
+    margin-bottom: 20px;
+  }
+}
+
+.nextjs-toast-errors-parent {
+  display: none;
 }
